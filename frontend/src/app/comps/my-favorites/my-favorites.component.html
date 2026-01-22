@@ -1,0 +1,65 @@
+<div class="favorites-container">
+  <header class="page-header">
+    <div class="header-content">
+      <h1>💖 המועדפים שלי</h1>
+      <p class="subtitle">כל המתכונים ששמרת במקום אחד</p>
+    </div>
+    <div class="header-decoration"></div>
+  </header>
+
+  <div *ngIf="isLoading" class="loader-container">
+    <div class="elegant-spinner"></div>
+    <p>מרעננים את רשימת הטעמים...</p>
+  </div>
+
+  <div *ngIf="errorMessage && !isLoading" class="error-toast">
+    <span class="icon">⚠️</span>
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <div *ngIf="!isLoading && favorites.length === 0 && !errorMessage" class="empty-state-card">
+    <div class="empty-illustration">🍳</div>
+    <h3>המטבח האישי שלך ריק...</h3>
+    <p>נראה שעדיין לא סימנת מתכונים בלב. זה הזמן לגלות טעמים חדשים!</p>
+    <a routerLink="/recipes" class="btn-discover">🔍 גלה מתכונים חדשים</a>
+  </div>
+
+  <div *ngIf="!isLoading && favorites.length > 0" class="favorites-grid">
+    <div 
+      *ngFor="let recipe of favorites" 
+      class="recipe-card"
+      (click)="viewRecipe(recipe.id)"
+    >
+      <div class="card-image-wrapper">
+        <img [src]="getImageUrl(recipe.image_path)" [alt]="recipe.title" loading="lazy">
+        
+        <button 
+          (click)="removeFavorite($event, recipe.id)"
+          class="unfavorite-btn"
+          title="הסר מהמועדפים"
+        >
+          <span class="heart-icon">💔</span>
+        </button>
+
+        <div class="card-overlay">
+          <span class="view-label">צפה במתכון</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <h3 class="recipe-title">{{ recipe.title }}</h3>
+        
+        <div class="recipe-details">
+          <div class="detail-item">
+            <span class="icon">⏱️</span>
+            <span>{{ formatPrepTime(recipe.prep_time) }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="icon">📊</span>
+            <span>{{ recipe.ingredients?.length || 0 }} רכיבים</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="my-recipes-container">
+  <div class="section-header">
+    <h1 class="section-title">המתכונים שלי</h1>
+    <div class="red-line"></div>
+    <p class="subtitle">ניהול ושיתוף המתכונים האישיים שלך</p>
+  </div>
+
+  <div class="action-bar">
+    <a routerLink="/add-recipe" class="chef-btn-red">
+      <span>+</span> הוספת מתכון חדש
+    </a>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="chef-spinner"></div>
+    <p>טוען את המתכונים שלך...</p>
+  </div>
+
+  <div *ngIf="errorMessage && !isLoading" class="error-banner">
+    {{ errorMessage }}
+  </div>
+
+  <div class="recipes-grid" *ngIf="!isLoading && myRecipes.length > 0">
+    <div class="recipe-card" *ngFor="let recipe of myRecipes" [routerLink]="['/recipe', recipe.id]">
+      
+      <div class="card-img-wrapper">
+        <img [src]="getImageUrl(recipe.image_path)" [alt]="recipe.title">
+        
+        <div class="admin-actions">
+          <button (click)="editRecipe($event, recipe.id)" class="action-btn edit" title="עריכה">
+            ✏️
+          </button>
+          <button (click)="deleteRecipe($event, recipe.id)" class="action-btn delete" title="מחיקה">
+            🗑️
+          </button>
+        </div>
+      </div>
+
+      <div class="card-info">
+        <h3 class="recipe-name">{{ recipe.title }}</h3>
+        <div class="recipe-meta">
+          <span>⏱️ {{ formatPrepTime(recipe.prep_time) }}</span>
+          <span>🥘 {{ recipe.ingredients.length }} רכיבים</span>
+        </div>
+        <p class="recipe-excerpt">
+          {{ recipe.instructions.substring(0, 60) }}...
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && myRecipes.length === 0 && !errorMessage" class="empty-state">
+    <div class="empty-content">
+      <span class="empty-icon">🍳</span>
+      <h3>עדיין לא העלית מתכונים</h3>
+      <p>הגיע הזמן לשתף את העולם בכישרון שלך!</p>
+      <a routerLink="/add-recipe" class="chef-btn-outline">להוספת מתכון ראשון</a>
+    </div>
+  </div>
+</div>

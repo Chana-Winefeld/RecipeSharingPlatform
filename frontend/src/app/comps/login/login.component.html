@@ -1,0 +1,54 @@
+<div class="login-wrapper">
+  <div class="login-card-new animate-fade-in">
+    <div class="login-header">
+      <div class="logo-placeholder">🍳</div>
+      <h2>ברוכים הבאים</h2>
+      <p>התחברו כדי לשמור ולשתף מתכונים</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert-box-danger">
+      <span class="icon">⚠️</span> {{ errorMessage }}
+    </div>
+
+    <form (ngSubmit)="onLogin()" autocomplete="off" class="login-form">
+      <div class="form-input-group">
+        <label for="username">שם משתמש או אימייל</label>
+        <div class="input-with-icon">
+          <input 
+            type="text" 
+            id="username" 
+            [(ngModel)]="username" 
+            name="username"
+            placeholder="הכניסו שם משתמש"
+            required
+            [disabled]="isLoading"
+          >
+        </div>
+      </div>
+
+      <div class="form-input-group">
+        <label for="password">סיסמה</label>
+        <div class="input-with-icon">
+          <input 
+            type="password" 
+            id="password" 
+            [(ngModel)]="password" 
+            name="password"
+            placeholder="הכניסו סיסמה"
+            required
+            [disabled]="isLoading"
+          >
+        </div>
+      </div>
+
+      <button type="submit" class="btn-login-main" [disabled]="isLoading">
+        <span *ngIf="!isLoading">התחברות</span>
+        <span *ngIf="isLoading" class="loader-dots">מתחבר...</span>
+      </button>
+
+      <div class="login-footer">
+        <p>עדיין אין לכם חשבון? <a routerLink="/register">הרשמו עכשיו</a></p>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+<div class="home-container">
+  <section class="main-hero">
+    <div class="hero-slide" *ngFor="let slide of slides; let i = index" [class.active]="i === currentSlide">
+      <img [src]="slide.image" class="hero-bg-img" alt="באנר">
+      <div class="hero-content-box" *ngIf="i === currentSlide">
+        <h1 class="hero-title">{{ slide.title }}</h1>
+        <a [routerLink]="slide.link" class="hero-btn-red">לכל המתכונים >></a>
+      </div>
+    </div>
+    <button class="carousel-arrow prev" (click)="prevSlide()">❮</button>
+    <button class="carousel-arrow next" (click)="nextSlide()">❯</button>
+  </section>
+
+  <section class="categories-section">
+    <div class="categories-container">
+      <div class="category-item" *ngFor="let cat of categories">
+        <div class="category-circle">
+          <img [src]="cat.image" [alt]="cat.name">
+        </div>
+        <span class="category-name">{{ cat.name }}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-header">
+      <h2 class="section-title">המתכונים החדשים שלנו</h2>
+      <div class="red-line"></div>
+    </div>
+
+    <div class="recipes-grid">
+      <div class="recipe-card" *ngFor="let recipe of featuredRecipes" [routerLink]="['/recipe', recipe.id]">
+        <div class="card-img-wrapper">
+          <img [src]="recipe.image" [alt]="recipe.name">
+          <span class="category-tag">{{ recipe.category }}</span>
+        </div>
+        <div class="card-info">
+          <h3 class="recipe-name">{{ recipe.name }}</h3>
+          <p class="recipe-author">מאת: {{ recipe.author }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="blog-section">
+  <div class="section-header">
+    <h2 class="section-title">טיפים מהמטבח של השף</h2>
+    <div class="red-line"></div>
+  </div>
+
+  <div class="blog-container">
+    <div class="blog-post-card" *ngFor="let post of blogPosts; let i = index" [class.reverse]="i % 2 !== 0">
+      <div class="post-image">
+        <img [src]="post.image" [alt]="post.title">
+      </div>
+      <div class="post-content">
+        <span class="post-tag">טיפ שבועי</span>
+        <h3 class="post-title">{{ post.title }}</h3>
+        <p class="post-excerpt">{{ post.excerpt }}</p>
+        <button class="read-more-btn">להמשך קריאה >></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="main-footer">
+  <div class="footer-top">
+    <div class="footer-column">
+      <img src="assets/image.png" alt="לוגו" class="footer-logo">
+      <p>השף שלכם בבית - מתכונים קלים, מהירים וטעימים לכל המשפחה.</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>קישורים מהירים</h4>
+      <ul>
+        <li><a routerLink="/recipes">כל המתכונים</a></li>
+        <li><a routerLink="/search">חיפוש לפי מקרר</a></li>
+        <li><a routerLink="/categories">קטגוריות</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>צרו קשר</h4>
+      <p>מייל: support&#64;taam-patuach.co.il</p>
+      <div class="social-links">
+        <span>עקבו אחרינו:</span>
+        <i class="social-icon">FB</i>
+        <i class="social-icon">IG</i>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2024 כל הזכויות שמורות - פרויקט טעם פתוח</p>
+  </div>
+</footer>

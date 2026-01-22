@@ -1,0 +1,183 @@
+.add-recipe-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+  direction: rtl;
+}
+
+.section-header { text-align: right; margin-bottom: 35px; }
+.section-title { font-size: 2.2rem; font-weight: 800; color: #222; }
+.red-line { height: 4px; width: 50px; background-color: #e31e24; margin: 10px 0; }
+
+.form-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.card-subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  color: #333;
+  border-right: 4px solid #e31e24;
+  padding-right: 15px;
+}
+
+/* עיצוב המצרכים עם מסגרות צבעוניות */
+.added-ingredients-list { list-style: none; padding: 0; }
+.added-ingredients-list li {
+  background: #fdfdfd;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px;
+  border-right: 8px solid #ccc; 
+}
+
+.border-meat { border-right-color: #e31e24 !important; }   /* אדום - בשרי */
+.border-dairy { border-right-color: #3498db !important; }  /* תכלת - חלבי */
+.border-parve { border-right-color: #f39c12 !important; }  /* כתום - פרווה */
+
+.btn-remove { background: none; border: none; color: #ff4d4d; cursor: pointer; font-size: 1.2rem; }
+
+/* עיצוב תמונה וכפתורים פנימיים */
+.upload-area {
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  background: #fafafa;
+}
+
+.preview-box {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.preview-box img { max-width: 100%; max-height: 400px; display: block; }
+
+.preview-actions {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  backdrop-filter: blur(4px);
+}
+
+.btn-img-action {
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  font-size: 0.9rem;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-delete-img { background: #e31e24; color: white; }
+.btn-change-img { background: white; color: #333; margin-bottom: 0; }
+.btn-img-action:hover { transform: scale(1.05); filter: brightness(1.1); }
+
+/* כפתורי פרסום */
+.form-actions-fixed { display: flex; gap: 20px; justify-content: center; margin-top: 40px; }
+.chef-btn-submit {
+  background: #e31e24; color: white; padding: 15px 60px;
+  border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 1.1rem;
+}
+.chef-btn-cancel {
+  background: white; border: 1px solid #999; padding: 15px 40px; border-radius: 4px; cursor: pointer;
+}
+
+/* שדות קלט */
+.ingredient-inputs-grid {
+  display: grid;
+  grid-template-columns: 2fr 0.8fr 1fr 1fr auto;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input, select, textarea {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.form-grid { display: flex; gap: 20px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+/* המיכל של התמונה */
+.preview-box {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 450px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  margin-top: 15px;
+}
+
+.preview-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* הסרגל השחור השקוף בתחתית */
+.image-overlay-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7); /* שחור שקוף */
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  backdrop-filter: blur(5px); /* אפקט טשטוש יוקרתי */
+}
+
+/* עיצוב הכפתורים כ"כפתורי טקסט" נקיים */
+.btn-img-flat {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  transition: all 0.2s;
+  margin-bottom: 0; /* חשוב עבור ה-label */
+}
+
+.btn-delete:hover {
+  color: #ff4d4d; /* הופך לאדום בריחוף */
+  transform: scale(1.05);
+}
+
+.btn-change:hover {
+  color: #3498db; /* הופך לכחול בריחוף */
+  transform: scale(1.05);
+}
+
+.btn-img-flat span {
+  font-size: 1.1rem;
+}

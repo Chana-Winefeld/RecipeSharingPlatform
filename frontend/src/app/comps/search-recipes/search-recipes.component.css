@@ -1,0 +1,196 @@
+.search-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+  direction: rtl;
+}
+
+/* כותרת */
+.section-header { text-align: right; margin-bottom: 30px; }
+.section-title { font-size: 2.2rem; font-weight: 800; color: #222; }
+.red-line { height: 4px; width: 50px; background-color: #e31e24; margin: 10px 0; }
+
+.card-styled {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  margin-bottom: 25px;
+  border: 1px solid #eee;
+}
+
+/* חיפוש חופשי */
+.search-input-wrapper {
+  display: flex;
+  gap: 10px;
+}
+.search-input-wrapper input {
+  flex: 1;
+  padding: 15px;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+.btn-add-main {
+  background: #222;
+  color: white;
+  border: none;
+  padding: 0 25px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* אזור המקרר */
+.selected-section {
+  background: #f9f9f9;
+  border: 2px dashed #ddd;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+.selected-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.selected-chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.ingredient-chip {
+  background: white;
+  border: 1px solid #e31e24;
+  color: #e31e24;
+  padding: 6px 15px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+}
+.remove-chip-btn {
+  background: none;
+  border: none;
+  color: #e31e24;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.chef-btn-primary {
+  background: #e31e24;
+  color: white;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* רכיבים נפוצים */
+.common-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.btn-common-ing {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-common-ing:hover { background: #f0f0f0; }
+.btn-common-ing:disabled { opacity: 0.4; cursor: default; }
+
+/* כרטיסיות תוצאה */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+.recipe-card-new {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.recipe-card-new:hover { transform: translateY(-5px); }
+
+.card-image-wrapper { position: relative; height: 180px; }
+.card-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+
+.match-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  padding: 8px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.score-num { font-size: 1.1rem; }
+.score-text { font-size: 0.6rem; text-transform: uppercase; }
+
+.card-content { padding: 15px; }
+.recipe-card-title { font-size: 1.2rem; margin-bottom: 8px; }
+.match-info { margin: 15px 0; font-size: 0.9rem; }
+.stat-missing { color: #d32f2f; }
+.stat-perfect { color: #2e7d32; font-weight: bold; }
+
+.btn-view-full {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #222;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.selected-chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.ingredient-chip {
+  background: #fff;
+  border: 1px solid #e31e24;
+  color: #e31e24;
+  padding: 8px 16px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(227, 30, 36, 0.1);
+}
+
+.remove-chip-btn {
+  background: #e31e24;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  cursor: pointer;
+}

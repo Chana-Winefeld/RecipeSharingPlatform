@@ -1,0 +1,33 @@
+# Angular
+node_modules/
+dist/
+.angular/
+/out-tsc/
+/tmp/
+/coverage/
+/e2e/test-output/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*

@@ -1,0 +1,66 @@
+<div class="app-wrapper">
+  <aside class="side-nav">
+    <div class="logo-container">
+      <a routerLink="/"><img src="assets/image.png" alt="לוגו" class="logo-img"></a>
+    </div>
+
+    <nav class="links-area">
+      <ul class="nav-list">
+        <li><a routerLink="/recipes" routerLinkActive="active">מתכונים</a></li>
+        <li><a routerLink="/search" routerLinkActive="active">חיפוש רכיבים</a></li>
+        
+        <ng-container *ngIf="authService.isLoggedIn()">
+          <li *ngIf="authService.isApprovedUploader() || authService.isAdmin()">
+            <a routerLink="/add-recipe" routerLinkActive="active">הוספת מתכון</a>
+          </li>
+          <li class="divider"></li>
+          <li><a routerLink="/my-recipes" routerLinkActive="active">המתכונים שלי</a></li>
+          <li><a routerLink="/my-favorites" routerLinkActive="active">המועדפים שלי</a></li>
+          <li><a routerLink="/profile" routerLinkActive="active">איזור אישי</a></li>
+          <li><a routerLink="/edit-profile" routerLinkActive="active">עריכת פרטים</a></li>
+          <li *ngIf="authService.isAdmin()">
+            <a routerLink="/admin" routerLinkActive="active" style="color: #e31e24;">פאנל ניהול</a>
+          </li>
+        </ng-container>
+      </ul>
+    </nav>
+
+    <div class="theme-toggle">
+      <button (click)="toggleTheme()" class="theme-btn">
+        <span>{{ themeService.isDarkMode() ? '☀️ מצב בהיר' : '🌙 מצב כהה' }}</span>
+      </button>
+    </div>
+
+    <div class="auth-footer">
+      <ng-container *ngIf="!authService.isLoggedIn()">
+        <a routerLink="/login" class="auth-link">התחברות</a>
+        <a routerLink="/register" class="auth-btn-red">הרשמה</a>
+      </ng-container>
+
+      <ng-container *ngIf="authService.isLoggedIn() && currentUser">
+        <div class="user-profile">
+          <span class="user-name">שלום, {{ currentUser.username }}</span>
+          <button (click)="logout()" class="logout-btn">התנתק</button>
+        </div>
+      </ng-container>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="fridge-bar-container" routerLink="/search">
+      <div class="fridge-black-box">
+        <div class="fridge-icon-box">
+          <img src="https://img.icons8.com/ios/50/ffffff/fridge.png" alt="מקרר" width="30">
+        </div>
+        <div class="fridge-labels">
+          <span class="fridge-main-text">פותחים מקרר ומתחילים לבשל</span>
+          <span class="fridge-sub-text">מגוון מתכונים למה שיש לך עכשיו במקרר</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-container">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

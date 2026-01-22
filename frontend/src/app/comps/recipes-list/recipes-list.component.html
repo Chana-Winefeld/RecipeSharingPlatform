@@ -1,0 +1,79 @@
+<div class="recipes-container">
+  <div class="section-header">
+    <h1 class="section-title">גילוי מתכונים</h1>
+    <div class="red-line"></div>
+    <p class="subtitle">מצאו את המנה המושלמת עבורכם</p>
+  </div>
+
+  <div class="filters-panel-styled">
+    <div class="filters-row">
+
+      <div class="filter-group">
+        <label>כשרות</label>
+        <select [(ngModel)]="selectedKosherType" (change)="applyFilters()">
+          <option value="all">הכל</option>
+          <option value="Parve">פרווה</option>
+          <option value="Dairy">חלבי</option>
+          <option value="Meat">בשרי</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>דירוג מינימלי</label>
+        <select [(ngModel)]="minRating" (change)="applyFilters()">
+          <option [ngValue]="0">כל הדירוגים</option>
+          <option [ngValue]="4">4 כוכבים ומעלה ⭐</option>
+          <option [ngValue]="3">3 כוכבים ומעלה ⭐</option>
+          <option [ngValue]="2">2 כוכבים ומעלה ⭐</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>מיין לפי</label>
+        <select [(ngModel)]="sortBy" (change)="applyFilters()">
+          <option value="created_at">חדש ביותר</option>
+          <option value="average_rating">הכי מדורג</option>
+          <option value="prep_time">זמן הכנה</option>
+        </select>
+      </div>
+
+      <div class="filter-group reset-group">
+        <button class="btn-reset" (click)="resetFilters()">איפוס</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="recipes-grid">
+    <div *ngFor="let recipe of filteredRecipes" class="recipe-card-new">
+
+      <div class="card-image-wrapper" (click)="viewRecipe(recipe.id)">
+        <img [src]="getImageUrl(recipe.image_path)" [alt]="recipe.title">
+        <div class="card-overlay">
+          <span class="view-text">👁️ צפה במתכון</span>
+        </div>
+      </div>
+
+      <div class="card-content" (click)="viewRecipe(recipe.id)">
+        <h3 class="recipe-card-title">{{ recipe.title }}</h3>
+        <div class="recipe-card-meta">
+          <span class="meta-item">⏱️ {{ formatPrepTime(recipe.prep_time) }}</span>
+
+          <span class="kosher-tag" [ngClass]="getRecipeKosherType(recipe)">
+            {{
+            getRecipeKosherType(recipe) === 'Meat' ? 'בשרי' :
+            getRecipeKosherType(recipe) === 'Dairy' ? 'חלבי' : 'פרווה'
+            }}
+          </span>
+
+          <span class="meta-item rating" *ngIf="recipe.average_rating">
+            ⭐ {{ recipe.average_rating | number:'1.1-1' }}
+          </span>
+        </div>
+
+        <p class="recipe-card-desc">
+          {{ recipe.instructions.substring(0, 75) }}...
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

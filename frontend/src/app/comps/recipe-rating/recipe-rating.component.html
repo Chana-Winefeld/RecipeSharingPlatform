@@ -1,0 +1,104 @@
+<div class="rating-system-wrapper">
+  
+  <div class="rating-summary-card">
+    <div class="summary-content">
+      <div class="average-score-box">
+        <span class="score-number">{{ averageRating | number:'1.1-1' }}</span>
+        <span class="score-out-of">מתוך 5</span>
+      </div>
+      
+      <div class="summary-details">
+        <div class="stars-display">
+          <span *ngFor="let star of getStarsArray()" 
+                class="star-static"
+                [class.filled]="isAverageStarFilled(star)">
+            ★
+          </span>
+        </div>
+        <div class="total-count">{{ totalRatings }} חוות דעת של בשלנים</div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="successMessage" class="toast success">✅ {{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="toast error">⚠️ {{ errorMessage }}</div>
+
+  <div *ngIf="authService.isLoggedIn() && !showRatingForm && !isOwner" class="action-bar">
+    <button (click)="showRatingForm = true" class="btn-open-rate">
+      ⭐ דרג את המתכון וכתוב ביקורת
+    </button>
+  </div>
+
+  <div *ngIf="isOwner" class="owner-note">
+    💡 זה המתכון שלך! כיף לראות מה אחרים חושבים עליו.
+  </div>
+
+  <div *ngIf="showRatingForm" class="rating-form-overlay">
+    <div class="rating-form-container">
+      <h3>מה דעתך על המנה?</h3>
+      
+    <div class="stars-selector">
+        <span 
+          *ngFor="let star of getStarsArray()" 
+          class="star-interactive"
+          [class.active]="isStarFilled(star)"
+          (mouseenter)="hoveredStar = star"
+          (mouseleave)="hoveredStar = 0"
+          (click)="userRating = star"
+        >
+          ★
+        </span>
+      </div>
+
+      <textarea 
+        [(ngModel)]="userComment" 
+        placeholder="ספרו לנו איך יצא! יש לכם טיפים לשדרוג?" 
+        class="modern-textarea"
+        rows="4">
+      </textarea>
+
+      <div class="form-buttons">
+        <button (click)="submitRating()" class="btn-submit" [disabled]="isSubmitting || userRating === 0">
+          {{ isSubmitting ? 'שולח...' : 'פרסם דירוג' }}
+        </button>
+        <button (click)="cancelRating()" class="btn-cancel" [disabled]="isSubmitting">ביטול</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="reviews-list" *ngIf="!isLoadingRatings && allRatings.length > 0">
+    <h4 class="reviews-header">ביקורות של משתמשים</h4>
+    
+    <div *ngFor="let rating of allRatings" class="review-item">
+      <div class="review-avatar">
+        {{ (rating.username || 'U').charAt(0).toUpperCase() }}
+      </div>
+      
+      <div class="review-body">
+        <div class="review-meta">
+          <span class="reviewer-name">{{ rating.username }}</span>
+          <span class="review-date">{{ rating.created_at }}</span>
+        </div>
+        
+        <div class="review-stars">
+          <span *ngFor="let s of getStarsArray()" 
+                class="mini-star" 
+                [class.filled]="s <= rating.score">★</span>
+        </div>
+        
+        <p class="review-text" *ngIf="rating.comment">{{ rating.comment }}</p>
+
+        <button 
+          *ngIf="authService.getCurrentUser()?.id === rating.user_id || authService.isAdmin()"
+          (click)="deleteRating()" 
+          class="btn-delete-review">
+          מחק דירוג שלי
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoadingRatings && allRatings.length === 0" class="empty-reviews">
+    <p>עדיין אין ביקורות למתכון זה. תהיו הראשונים לדרג! 🍳</p>
+  </div>
+</div>

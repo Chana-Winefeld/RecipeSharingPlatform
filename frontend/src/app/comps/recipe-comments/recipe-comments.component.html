@@ -1,0 +1,77 @@
+<div class="comments-section-wrapper">
+  <div class="comments-header">
+    <h3 class="comments-title">
+      <span class="icon">💬</span> תגובות ודיון 
+      <span class="comment-count">({{ comments.length }})</span>
+    </h3>
+  </div>
+
+  <div class="add-comment-container" *ngIf="authService.isLoggedIn()">
+    <div class="user-avatar-static">👤</div>
+    <div class="comment-form-box">
+      <textarea
+        [(ngModel)]="newComment"
+        placeholder="איך יצא לכם? שתפו אותנו..."
+        class="modern-textarea"
+        rows="3"
+        [disabled]="isSubmitting"
+        maxlength="1000"
+      ></textarea>
+      
+      <div class="form-actions-row">
+        <span class="char-counter" [class.limit]="newComment.length > 900">
+          {{ newComment.length }}/1000
+        </span>
+        <button 
+          (click)="addComment()"
+          class="btn-post-comment"
+          [disabled]="isSubmitting || !newComment.trim()"
+        >
+          <span *ngIf="!isSubmitting">פרסם תגובה</span>
+          <span *ngIf="isSubmitting" class="mini-spinner"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="already-commented-info" *ngIf="userHasCommented && authService.isLoggedIn()">
+    <p>✨ תודה על השיתוף! כבר הוספת תגובה למתכון הזה.</p>
+  </div>
+
+  <div class="comments-feed">
+    <div *ngFor="let comment of comments" class="comment-bubble-wrapper">
+      <div class="comment-avatar">
+        {{ comment.username?.charAt(0).toUpperCase() }}
+      </div>
+      
+      <div class="comment-bubble">
+        <div class="comment-top-bar">
+          <span class="comment-author">{{ comment.username }}</span>
+          <span class="comment-timestamp">{{ formatDate(comment.created_at) }}</span>
+        </div>
+
+        <div class="comment-text" *ngIf="editingCommentId !== comment.id">
+          {{ comment.content }}
+        </div>
+
+        <div class="edit-mode-container" *ngIf="editingCommentId === comment.id">
+          <textarea [(ngModel)]="editingContent" class="edit-textarea"></textarea>
+          <div class="edit-buttons">
+            <button (click)="saveEdit(comment.id)" class="btn-save-edit">שמור</button>
+            <button (click)="editingCommentId = null" class="btn-cancel-edit">ביטול</button>
+          </div>
+        </div>
+
+        <div class="comment-management" *ngIf="canEditOrDelete(comment) && editingCommentId !== comment.id">
+          <button (click)="startEdit(comment)" class="action-link edit">ערוך</button>
+          <span class="divider">•</span>
+          <button (click)="deleteComment(comment.id)" class="action-link delete">מחק</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-toast">
+    {{ errorMessage }}
+  </div>
+</div>

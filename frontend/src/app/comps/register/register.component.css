@@ -1,0 +1,138 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  padding: 40px 20px;
+  background: #ffffff; /* לבן נקי כמו במטבח */
+}
+
+.register-card {
+  background: white;
+  padding: 40px;
+  border-radius: 4px; /* פינות פחות מעוגלות, מראה יותר מקצועי */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* צל עדין מאוד */
+  max-width: 450px;
+  width: 100%;
+  border: 1px solid #f0f0f0;
+}
+
+.register-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.register-header h2 {
+  font-size: 1.8rem;
+  color: #d32f2f; /* אדום שף לבן */
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: #616161;
+  font-size: 1rem;
+}
+
+/* שדות קלט */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 2px; /* סגנון נקי וחד */
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #d32f2f; /* פוקוס באדום */
+  box-shadow: none;
+}
+
+/* כפתור הרשמה - אדום שף לבן */
+.btn-register {
+  width: 100%;
+  padding: 14px;
+  background: #d32f2f; 
+  color: white;
+  border: none;
+  border-radius: 2px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 15px;
+}
+
+.btn-register:hover:not(:disabled) {
+  background: #b71c1c; /* אדום כהה יותר */
+}
+
+.btn-register:disabled {
+  background: #e0e0e0;
+  color: #9e9e9e;
+  cursor: not-allowed;
+}
+
+/* הודעות התראה */
+.alert {
+  padding: 12px;
+  border-radius: 2px;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  text-align: center;
+  border-right: 4px solid; /* פס צדדי להדגשה */
+}
+
+.alert-danger {
+  background: #ffebee;
+  color: #c62828;
+  border-right-color: #d32f2f;
+}
+
+.alert-success {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-right-color: #4caf50;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 25px;
+  color: #757575;
+}
+
+.login-link a {
+  color: #d32f2f;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}

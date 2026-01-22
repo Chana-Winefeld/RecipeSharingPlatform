@@ -1,0 +1,82 @@
+<div class="search-container">
+  <div class="section-header">
+    <h1 class="section-title">מה מבשלים היום?</h1>
+    <div class="red-line"></div>
+    <p class="subtitle">סמנו את המצרכים שיש לכם בבית, ונמצא לכם מתכון מושלם</p>
+  </div>
+
+  <div class="input-section card-styled">
+    <div class="search-input-wrapper">
+      <input 
+        type="text" 
+        [(ngModel)]="newIngredient" 
+        (keyup.enter)="addCustomIngredient()"
+        placeholder="הקלידו רכיב (לדוגמה: ביצים, חלב...)"
+      >
+      <button (click)="addCustomIngredient()" class="btn-add-main">הוסף למקרר +</button>
+    </div>
+  </div>
+
+  <div class="selected-section" *ngIf="selectedIngredients.length > 0">
+    <div class="selected-header">
+      <h3>🛒 המקרר שלי ({{ selectedIngredients.length }})</h3>
+      <button (click)="clearAll()" class="btn-clear-all">נקה הכל</button>
+    </div>
+    <div class="selected-chips-grid">
+      <div *ngFor="let ingredient of selectedIngredients" class="ingredient-chip">
+        <span>{{ ingredient }}</span>
+        <button (click)="removeIngredient(ingredient)" class="remove-chip-btn">✕</button>
+      </div>
+    </div>
+    <button (click)="searchRecipes()" class="chef-btn-primary" [disabled]="isSearching">
+      {{ isSearching ? 'מחפש מתכונים...' : 'מצא לי מה לאכול 🍳' }}
+    </button>
+  </div>
+
+  <div class="common-ingredients-section card-styled">
+    <h4 class="small-title">הוספה מהירה:</h4>
+    <div class="common-grid">
+      <button 
+        *ngFor="let ing of commonIngredients" 
+        (click)="toggleIngredient(ing)"
+        [class.active-ing]="selectedIngredients.includes(ing)"
+        class="btn-common-ing"
+      >
+        {{ ing }}
+      </button>
+    </div>
+  </div>
+
+  <div class="results-grid" *ngIf="searchResults.length > 0">
+    <div *ngFor="let result of searchResults" class="recipe-card-new" (click)="viewRecipe(result.recipe.id)">
+      <div class="card-image-wrapper">
+        <img [src]="getImageUrl(result.recipe.image_path)" [alt]="result.recipe.title">
+        
+        <div class="match-badge" [style.background-color]="getScoreColor(result.matching_score)">
+          <span class="score-num">{{ result.matching_score }}%</span>
+          <span class="score-text">התאמה</span>
+        </div>
+      </div>
+
+      <div class="card-content">
+        <h3 class="recipe-card-title">{{ result.recipe.title }}</h3>
+        
+        <div class="recipe-card-meta">
+          <span class="meta-item">⏱️ {{ formatPrepTime(result.recipe.prep_time) }}</span>
+          <span class="meta-item">🥘 {{ result.recipe.ingredients.length }} רכיבים</span>
+        </div>
+
+        <div class="match-info">
+          <p class="stat-missing" *ngIf="result.missing_ingredients_count > 0">
+            ⚠️ חסרים לכם <strong>{{ result.missing_ingredients_count }}</strong> רכיבים
+          </p>
+          <p class="stat-perfect" *ngIf="result.missing_ingredients_count === 0">
+            ✨ יש לכם הכל!
+          </p>
+        </div>
+        
+        <button class="btn-view-full">למתכון המלא</button>
+      </div>
+    </div>
+  </div>
+</div>

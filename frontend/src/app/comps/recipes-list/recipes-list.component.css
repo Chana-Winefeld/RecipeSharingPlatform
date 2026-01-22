@@ -1,0 +1,245 @@
+.recipes-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  direction: rtl;
+}
+
+/* כותרת */
+.section-header { text-align: right; margin-bottom: 30px; }
+.section-title { font-size: 2.2rem; font-weight: 800; color: #222; margin: 0; }
+.red-line { height: 4px; width: 50px; background-color: #e31e24; margin: 10px 0; }
+.subtitle { color: #666; }
+
+/* פאנל פילטרים */
+.filters-panel-styled {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+  margin-bottom: 40px;
+  border: 1px solid #eee;
+}
+
+.filters-row {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.filter-group { display: flex; flex-direction: column; gap: 8px; }
+.filter-group label { font-weight: bold; font-size: 0.9rem; color: #444; }
+
+.filter-group input, .filter-group select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #f9f9f9;
+}
+
+.btn-reset {
+  background: none;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-reset:hover { background: #f0f0f0; }
+
+/* גריד של כרטיסיות */
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+/* כרטיסיה בודדת */
+.recipe-card-new {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+  border-right: 6px solid #ccc; /* מסגרת ברירת מחדל */
+  cursor: pointer;
+}
+
+.recipe-card-new:hover { transform: translateY(-8px); }
+
+/* צבעי כשרות למסגרת */
+.border-meat { border-right-color: #e31e24 !important; }
+.border-dairy { border-right-color: #3498db !important; }
+.border-parve { border-right-color: #f39c12 !important; }
+
+/* תמונה בכרטיסיה */
+.card-image-wrapper {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.recipe-card-new:hover .card-overlay { opacity: 1; }
+.view-text { color: white; font-weight: bold; border: 2px solid white; padding: 5px 15px; border-radius: 20px; }
+
+/* תוכן הכרטיסיה */
+.card-content { padding: 20px; }
+.recipe-card-title { font-size: 1.25rem; margin: 0 0 10px 0; color: #333; }
+
+.recipe-card-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 12px;
+}
+
+.recipe-card-desc {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.admin-delete-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  z-index: 10;
+}
+.recipes-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  direction: rtl;
+}
+
+.section-header { text-align: right; margin-bottom: 30px; }
+.section-title { font-size: 2.2rem; font-weight: 800; color: #222; }
+.red-line { height: 4px; width: 50px; background-color: #e31e24; margin: 10px 0; }
+
+/* פאנל פילטרים */
+.filters-panel-styled {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  margin-bottom: 40px;
+  border: 1px solid #f0f0f0;
+}
+
+.filters-row {
+  display: flex;
+  gap: 15px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.filter-group { display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 150px; }
+.filter-group label { font-weight: bold; font-size: 0.85rem; color: #555; }
+
+.filter-group select, .filter-group input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  background: #fdfdfd;
+}
+
+.btn-reset {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 41px;
+}
+
+/* כרטיסיות נקיות ללא פס צבעוני */
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.recipe-card-new {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  transition: all 0.3s ease;
+  border: 1px solid #f0f0f0; /* מסגרת דקה אחידה לכולם */
+}
+
+.recipe-card-new:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.card-image-wrapper { position: relative; height: 210px; }
+.card-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+
+.card-content { padding: 20px; }
+.recipe-card-title { font-size: 1.3rem; margin-bottom: 12px; color: #222; font-weight: 700; }
+
+.recipe-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* תגיות כשרות עדינות במקום פסים */
+.kosher-tag {
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  background: #eee;
+}
+.kosher-tag.Dairy { color: #3498db; background: #ebf5fb; }
+.kosher-tag.Meat { color: #e31e24; background: #fdf1f1; }
+.kosher-tag.Parve { color: #f39c12; background: #fef9e7; }
+
+.recipe-card-desc {
+  font-size: 0.9rem;
+  color: #777;
+  line-height: 1.5;
+}
+
+.admin-delete-btn {
+  position: absolute;
+  top: 10px; left: 10px;
+  background: white; border: none;
+  width: 30px; height: 30px; border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+

@@ -1,0 +1,176 @@
+.recipe-detail-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  direction: rtl;
+}
+
+/* Breadcrumbs */
+.recipe-breadcrumb {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 25px;
+}
+.recipe-breadcrumb span:first-child {
+  cursor: pointer;
+}
+.recipe-breadcrumb span:first-child:hover {
+  color: #e31e24;
+}
+
+/* מבנה ראשי */
+.recipe-main-section {
+  display: flex;
+  gap: 50px;
+  margin-bottom: 60px;
+}
+
+.recipe-gallery-side { flex: 1.2; }
+.recipe-info-side { flex: 1; text-align: right; }
+
+/* גלריה */
+.main-image-wrapper {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 450px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.main-image-wrapper img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+.mini-thumbnails {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.mini-thumbnails div {
+  width: 70px; height: 50px;
+  border-radius: 4px; overflow: hidden;
+  cursor: pointer; border: 2px solid transparent;
+}
+
+.mini-thumbnails div.active { border-color: #e31e24; }
+
+/* טקסט וכותרות */
+.recipe-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.recipe-quick-meta {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+  padding: 15px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.meta-item .label { color: #888; margin-left: 8px; }
+.meta-item .value { font-weight: bold; color: #333; }
+
+/* --- שורת כפתורי פעולה (מועדפים, הקראה, עריכה, מחיקה) --- */
+.action-buttons-wrapper {
+  display: flex;
+  align-items: center; /* יישור אנכי של כל הכפתורים */
+  gap: 12px;
+  margin-bottom: 30px;
+  flex-wrap: wrap; /* מאפשר ירידת שורה במובייל */
+}
+
+/* עיצוב אחיד לכל כפתורי השף בשורה */
+.chef-btn-fav, .chef-btn-edit, .chef-btn-delete {
+  white-space: nowrap; /* מונע מהטקסט להישבר */
+  height: 42px;        /* גובה אחיד לכולם */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+/* כפתור מועדפים */
+.chef-btn-fav {
+  background: white;
+  border: 1px solid #e31e24;
+  color: #e31e24;
+}
+
+.chef-btn-fav.is-favorite {
+  background: #e31e24;
+  color: white;
+}
+
+/* כפתור עריכה - כתום */
+.chef-btn-edit {
+  background-color: #f39c12;
+  color: white;
+  border: none;
+}
+
+.chef-btn-edit:hover {
+  background-color: #e67e22;
+}
+
+/* כפתור מחיקה - אדום עדין */
+.chef-btn-delete {
+  background-color: #fff;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.chef-btn-delete:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* גריד רכיבים והוראות */
+.recipe-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 60px;
+}
+
+.chef-section-title {
+  font-size: 1.5rem;
+  border-bottom: 2px solid #e31e24;
+  width: fit-content;
+  padding-bottom: 5px;
+  margin-bottom: 25px;
+}
+
+.chef-ingredients-list { list-style: none; padding: 0; }
+.chef-ingredients-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid #f2f2f2;
+  display: flex;
+  gap: 10px;
+}
+
+.ing-amount { font-weight: bold; color: #e31e24; min-width: 60px; }
+
+.chef-instructions-text {
+  line-height: 1.8;
+  font-size: 1.1rem;
+  white-space: pre-line;
+  color: #444;
+}
+
+/* התאמה לנייד */
+@media (max-width: 900px) {
+  .recipe-main-section { flex-direction: column; }
+  .recipe-details-grid { grid-template-columns: 1fr; }
+  .main-image-wrapper { height: 300px; }
+  .recipe-title { font-size: 2rem; }
+  .action-buttons-wrapper { gap: 8px; }
+}

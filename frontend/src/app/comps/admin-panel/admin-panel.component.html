@@ -1,0 +1,88 @@
+<div class="admin-container">
+  <div class="section-header">
+    <h1 class="section-title">ניהול מערכת</h1>
+    <div class="red-line"></div>
+    <p class="subtitle">ניהול הרשאות משתמשים ואישור מעלי מתכונים</p>
+  </div>
+
+  <div class="alerts-container">
+    <div *ngIf="successMessage" class="alert-toast success">
+      <span class="alert-icon">✅</span> {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="alert-toast danger">
+      <span class="alert-icon">⚠️</span> {{ errorMessage }}
+    </div>
+  </div>
+
+  <div class="admin-tabs">
+    <button 
+      class="tab-item"
+      [class.active]="activeTab === 'requests'"
+      (click)="switchTab('requests')"
+    >
+      <span>📝</span> בקשות המתנה ({{ uploaderRequests.length }})
+    </button>
+    <button 
+      class="tab-item"
+      [class.active]="activeTab === 'users'"
+      (click)="switchTab('users')"
+    >
+      <span>👥</span> כל המשתמשים ({{ allUsers.length }})
+    </button>
+  </div>
+
+  <div *ngIf="activeTab === 'requests'" class="tab-view animate-fade">
+    <div *ngIf="isLoadingRequests" class="loading-state">טוען בקשות...</div>
+    
+    <div class="users-grid" *ngIf="!isLoadingRequests">
+      <div *ngFor="let user of uploaderRequests" class="user-card request-card">
+        <div class="user-avatar">{{ user.username.charAt(0) }}</div>
+        <div class="user-info">
+          <h4>{{ user.username }}</h4>
+          <p>{{ user.email }}</p>
+        </div>
+        <div class="user-actions">
+          <button (click)="approveUser(user.id, user.username)" class="btn-approve-action">
+            אישור העלאה
+          </button>
+        </div>
+      </div>
+      
+      <div *ngIf="uploaderRequests.length === 0" class="empty-state">
+        <p>אין בקשות חדשות הממתינות לאישור</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="activeTab === 'users'" class="tab-view animate-fade">
+    <div *ngIf="isLoadingUsers" class="loading-state">טוען משתמשים...</div>
+    
+    <div class="users-grid" *ngIf="!isLoadingUsers">
+      <div *ngFor="let user of allUsers" class="user-card" [class.is-admin]="user.role === 'Admin'">
+        <div class="user-main-info">
+          <div class="user-avatar-small">{{ user.username.charAt(0) }}</div>
+          <div>
+            <h4>{{ user.username }} 
+              <span class="role-badge" *ngIf="user.role === 'Admin'">מנהל</span>
+            </h4>
+            <p>{{ user.email }}</p>
+          </div>
+        </div>
+
+        <div class="user-status-section">
+          <span class="status-tag" [class.approved]="user.is_approved_uploader">
+            {{ user.is_approved_uploader ? '✅ מאושר להעלאה' : '⏳ חסר הרשאת העלאה' }}
+          </span>
+          
+          <button 
+            *ngIf="user.role !== 'Admin' && !user.is_approved_uploader"
+            (click)="approveUser(user.id, user.username)"
+            class="btn-small-approve"
+          >
+            אשר כעת
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<div class="add-recipe-container">
+  <div class="section-header">
+    <h1 class="section-title">הוספת מתכון חדש</h1>
+    <div class="red-line"></div>
+    <p class="subtitle">שתפו אותנו בסודות מהמטבח שלכם</p>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" class="recipe-form-styled">
+
+    <div class="form-card">
+      <h2 class="card-subtitle">📋 מידע כללי</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>שם המתכון</label>
+          <input type="text" [(ngModel)]="title" name="title" placeholder="לדוגמה: פאי לימון מושלם" required>
+        </div>
+        <div class="form-group">
+          <label>זמן הכנה (דקות)</label>
+          <input type="number" [(ngModel)]="prepTime" name="prepTime" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h2 class="card-subtitle">🛒 מצרכים</h2>
+      <div class="ingredient-inputs-grid">
+        <input type="text" [(ngModel)]="newIngredient.product" name="product" placeholder="שם המצרך">
+        <input type="number" [(ngModel)]="newIngredient.amount" name="amount" placeholder="כמות" style="width: 70px;">
+
+        <select [(ngModel)]="newIngredient.unit" name="unit">
+          <option *ngFor="let unit of unitOptions" [value]="unit">{{unit}}</option>
+        </select>
+
+        <select [(ngModel)]="newIngredient.type" name="type" class="type-select">
+          <option value="Parve">פרווה</option>
+          <option value="Dairy">חלבי</option>
+          <option value="Meat">בשרי</option>
+        </select>
+
+        <button type="button" class="btn-add-ing" (click)="addIngredient()">הוסף +</button>
+      </div>
+
+      <ul class="added-ingredients-list">
+        <li *ngFor="let ing of ingredients; let i = index"
+          [ngClass]="{'border-meat': ing.type === 'Meat', 'border-dairy': ing.type === 'Dairy', 'border-parve': ing.type === 'Parve'}">
+          <div class="ing-info">
+            <span class="ing-text"><strong>{{ing.amount}} {{ing.unit}}</strong> - {{ing.product}}</span>
+          </div>
+          <button type="button" (click)="removeIngredient(i)" class="btn-remove">✖</button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="form-card">
+      <h2 class="card-subtitle">👨‍🍳 שלבי הכנה</h2>
+      <textarea [(ngModel)]="instructions" name="instructions" rows="6" placeholder="איך מכינים?"></textarea>
+    </div>
+
+    <div class="form-card">
+      <h2 class="card-subtitle">📸 תמונת המנה</h2>
+
+      <div class="upload-area" [class.dragging]="isDragging" (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+
+        <input type="file" id="imageUpload" (change)="onFileSelected($event)" accept="image/*" hidden>
+
+        <label for="imageUpload" class="upload-label" *ngIf="!imagePreview">
+          <div class="upload-icon">🖼️</div>
+          <p><strong>לחצו לבחירת תמונה</strong> או גררו אותה לכאן</p>
+        </label>
+
+        <div *ngIf="imagePreview" class="preview-box">
+          <img [src]="imagePreview" alt="Preview">
+          <div class="image-overlay-bar">
+            <button type="button" (click)="removeImage()" class="btn-img-flat btn-delete">
+              <span>🗑️</span> הסר תמונה
+            </button>
+            <label for="imageUpload" class="btn-img-flat btn-change">
+              <span>🔄</span> החלף תמונה
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions-fixed">
+      <button type="submit" class="chef-btn-submit" [disabled]="isSubmitting || ingredients.length === 0">
+        {{ isSubmitting ? 'מעלה מתכון...' : 'פרסום המתכון' }}
+      </button>
+      <button type="button" (click)="resetForm()" class="chef-btn-cancel">ביטול</button>
+    </div>
+  </form>
+</div>

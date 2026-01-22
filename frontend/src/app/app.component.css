@@ -1,0 +1,181 @@
+/* מבנה העטיפה הראשי */
+.app-wrapper {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+/* תפריט צדדי מקובע */
+.side-nav {
+  width: 260px;
+  min-width: 260px; /* חשוב! מונע מהתפריט להתכווץ */
+  background-color: #ffffff;
+  border-left: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh; /* גובה מסך מלא */
+  z-index: 1000;
+}
+
+/* לוגו */
+.logo-container {
+  background-color: #000;
+  padding: 30px 15px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.logo-img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* אזור הקישורים עם גלילה פנימית אם צריך */
+.links-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 0;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-list li a {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: 0.2s;
+  border-radius: 4px;
+}
+
+.nav-list li a:hover, 
+.nav-list li a.active {
+  border: 1px solid #000; /* מסגרת שחורה ב-hover */
+  font-weight: bold;
+}
+
+/* מפריד שחור דק */
+.divider {
+  height: 1px;
+  background-color: #000;
+  margin: 15px 15px;
+}
+
+/* כפתור מצב כהה */
+.theme-toggle {
+  padding: 10px 20px;
+  border-top: 1px solid #eee;
+  flex-shrink: 0;
+}
+
+.theme-btn {
+  width: 100%;
+  padding: 10px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* אזור המשתמש בתחתית - תמיד גלוי */
+.auth-footer {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+  flex-shrink: 0; /* מונע מהחלק הזה להיעלם */
+}
+
+.auth-link {
+  display: block;
+  text-align: center;
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.auth-btn-red {
+  display: block;
+  text-align: center;
+  background-color: #e31e24;
+  color: white !important;
+  padding: 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.user-profile {
+  text-align: center;
+}
+
+.user-name {
+  display: block;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 5px;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: #e31e24;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* אזור התוכן הראשי */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* מונע מהתוכן לדחוף את התפריט */
+}
+
+/* בר המקרר */
+.fridge-bar-container {
+  padding: 15px 20px;
+  background: #fff;
+}
+
+.fridge-black-box {
+  background: #000;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
+  height: 60px;
+  color: white; /* טקסט לבן כברירת מחדל */
+}
+
+.fridge-labels {
+  display: flex;
+  flex-direction: column;
+  margin-right: 15px;
+}
+
+.fridge-main-text { font-weight: bold; }
+.fridge-sub-text { font-size: 0.8rem; opacity: 0.8; }
+
+.page-container {
+  padding: 20px;
+  flex: 1;
+}
+
+/* מצב כהה ספציפי לקומפוננטה */
+body.dark-mode .side-nav { background-color: #1e1e1e; border-color: #333; }
+body.dark-mode .nav-list li a { color: #ccc; }
+body.dark-mode .nav-list li a:hover, body.dark-mode .nav-list li a.active { border-color: #fff; color: #fff; }
+body.dark-mode .user-name { color: #fff; }
+body.dark-mode .auth-footer { background-color: #252525; }

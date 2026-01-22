@@ -1,0 +1,93 @@
+<div class="profile-container">
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>טוען את הפרופיל שלך...</p>
+  </div>
+
+  <div *ngIf="errorMessage && !isLoading" class="alert-box error">
+    <span class="icon">⚠️</span> {{ errorMessage }}
+  </div>
+
+  <div *ngIf="user && !isLoading" class="profile-content">
+    
+    <header class="profile-header">
+      <div class="avatar-wrapper">
+        <img *ngIf="user.profile_image" [src]="authService.getProfileImageUrl(user.profile_image)" class="avatar-img" alt="פרופיל">
+        <div *ngIf="!user.profile_image" class="avatar-placeholder">
+          {{ user.username.charAt(0).toUpperCase() }}
+        </div>
+      </div>
+      <div class="header-text">
+        <h1 class="welcome-title">שלום, {{ user.username }}!</h1>
+        <p class="subtitle">ברוך הבא למטבח הפרטי שלך</p>
+      </div>
+    </header>
+
+    <div *ngIf="successMessage" class="alert-box success">
+      <span class="icon">✅</span> {{ successMessage }}
+    </div>
+
+    <div class="profile-grid">
+      <section class="info-card">
+        <h2 class="card-title">📋 פרטי חשבון</h2>
+        <div class="info-list">
+          <div class="info-item">
+            <span class="label">שם משתמש:</span>
+            <span class="value">{{ user.username }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">אימייל:</span>
+            <span class="value">{{ user.email }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">סטטוס:</span>
+            <span class="badge" [ngClass]="{
+              'admin': authService.isAdmin(),
+              'uploader': authService.isApprovedUploader(),
+              'user': !authService.isAdmin() && !authService.isApprovedUploader()
+            }">
+              {{ authService.isAdmin() ? 'מנהל מערכת' : (authService.isApprovedUploader() ? 'בשלן מאושר' : 'משתמש רשום') }}
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section class="actions-card">
+        <h2 class="card-title">🛠️ פעולות מהירות</h2>
+        
+        <div class="actions-grid">
+          <button *ngIf="authService.isApprovedUploader() || authService.isAdmin()" 
+                  (click)="goToAddRecipe()" class="action-btn primary">
+            <span class="btn-icon">🍳</span>
+            הוספת מתכון חדש
+          </button>
+
+          <div *ngIf="!authService.isApprovedUploader() && !authService.isAdmin()" class="request-box">
+            <p *ngIf="!user.upload_request_sent">רוצה לשתף מתכונים משלך?</p>
+            <p *ngIf="user.upload_request_sent" class="status-waiting">הבקשה שלך ממתינה לאישור מנהל</p>
+            
+            <button *ngIf="!user.upload_request_sent"
+                    (click)="requestUploadPermission()" 
+                    class="action-btn secondary" 
+                    [disabled]="isRequestingPermission">
+              {{ isRequestingPermission ? 'שולח...' : 'בקש אישור העלאה' }}
+            </button>
+          </div>
+
+          <a *ngIf="authService.isAdmin()" routerLink="/admin" class="action-btn admin-btn">
+            <span class="btn-icon">🛡️</span>
+            כניסה לפאנל ניהול
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <footer class="profile-footer">
+      <div class="quick-links">
+        <a routerLink="/edit-profile" class="footer-link">✏️ עריכת פרופיל</a>
+        <a routerLink="/my-recipes" class="footer-link">👨‍🍳 המתכונים שלי</a>
+        <a routerLink="/my-favorites" class="footer-link">💖 מועדפים</a>
+      </div>
+    </footer>
+  </div>
+</div>

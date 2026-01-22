@@ -1,0 +1,137 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 150px);
+  background-color: #f9f9f9;
+  padding: 20px;
+  direction: rtl;
+}
+
+.login-card-new {
+  background: white;
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  border: 1px solid #eee;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-placeholder {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.login-header h2 {
+  font-size: 1.8rem;
+  color: #222;
+  margin-bottom: 5px;
+}
+
+.login-header p {
+  color: #777;
+  font-size: 0.95rem;
+}
+
+/* טופס */
+.form-input-group {
+  margin-bottom: 20px;
+}
+
+.form-input-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #444;
+  font-size: 0.9rem;
+}
+
+.form-input-group input {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #f0f0f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: 0.3s;
+  background: #fafafa;
+}
+
+.form-input-group input:focus {
+  border-color: #e31e24;
+  background: #fff;
+  outline: none;
+}
+
+/* כפתור */
+.btn-login-main {
+  width: 100%;
+  padding: 14px;
+  background: #222;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.btn-login-main:hover {
+  background: #e31e24;
+  transform: translateY(-2px);
+}
+
+.btn-login-main:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* הודעות שגיאה */
+.alert-box-danger {
+  background: #fff5f5;
+  color: #c53030;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-right: 4px solid #c53030;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.login-footer p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.login-footer a {
+  color: #e31e24;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* אנימציה */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

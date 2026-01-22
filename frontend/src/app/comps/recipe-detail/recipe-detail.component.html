@@ -1,0 +1,84 @@
+<div class="recipe-detail-container" *ngIf="recipe && !isLoading">
+
+  <nav class="recipe-breadcrumb">
+    <span (click)="goBack()">מתכונים</span> / <span>{{ recipe.title }}</span>
+  </nav>
+
+  <div class="recipe-main-section">
+    <div class="recipe-gallery-side">
+      <div class="main-image-wrapper">
+        <img [src]="allImages[selectedImageIndex]" [alt]="recipe.title">
+        <div class="recipe-badges">
+          <span class="kosher-badge">{{ getKosherEmoji(recipe.ingredients[0]?.type || 'Parve') }}</span>
+        </div>
+      </div>
+
+      <div *ngIf="allImages.length > 1" class="mini-thumbnails">
+        <div *ngFor="let img of allImages; let i = index" [class.active]="i === selectedImageIndex"
+          (click)="selectImage(i)">
+          <img [src]="img">
+        </div>
+      </div>
+    </div>
+
+    <div class="recipe-info-side">
+      <h1 class="recipe-title">{{ recipe.title }}</h1>
+
+      <div class="recipe-quick-meta">
+        <div class="meta-item">
+          <span class="label">זמן הכנה:</span>
+          <span class="value">{{ formatPrepTime(recipe.prep_time) }}</span>
+        </div>
+        <div class="meta-item">
+          <span class="label">דרגת קושי:</span>
+          <span class="value">קל</span>
+        </div>
+      </div>
+
+      <div class="action-buttons-wrapper">
+  <app-voice-reader [recipe]="recipe"></app-voice-reader>
+
+  <button (click)="toggleFavorite()" class="chef-btn-fav" [class.is-favorite]="isFavorite">
+  {{ isFavorite ? '❤ נשמר במועדפים' : '♡ שמירה למועדפים' }}
+  </button>
+
+  <button *ngIf="isOwner()" (click)="editRecipe()" class="chef-btn-edit">
+    ✏️ עריכה
+  </button>
+
+  <button *ngIf="canDeleteRecipe()" (click)="deleteRecipe()" class="chef-btn-delete">
+    🗑️ מחיקה
+  </button>
+</div>
+      <div class="recipe-description">
+        <p>מתכון נהדר של {{ recipe.user_id }} שמתאים בדיוק לארוחה הבאה שלכם.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="recipe-details-grid">
+    <div class="ingredients-card">
+      <h2 class="chef-section-title">מה צריכים?</h2>
+      <ul class="chef-ingredients-list">
+        <li *ngFor="let ing of recipe.ingredients">
+          <span class="ing-amount">{{ ing.amount }} {{ ing.unit }}</span>
+          <span class="ing-name">{{ ing.product }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="instructions-card">
+      <h2 class="chef-section-title">איך מכינים?</h2>
+      <div class="chef-instructions-text">
+        {{ recipe.instructions }}
+      </div>
+    </div>
+  </div>
+
+  <div class="social-sections">
+    <app-recipe-rating [recipeId]="recipe.id" [recipeOwnerId]="recipe.user_id"></app-recipe-rating>
+    <app-social-share [recipeTitle]="recipe.title" [recipeId]="recipe.id"></app-social-share>
+    <app-recipe-comments [recipeId]="recipe.id"></app-recipe-comments> 
+    
+  </div>
+</div>

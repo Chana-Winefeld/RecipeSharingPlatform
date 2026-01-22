@@ -1,0 +1,26 @@
+<div class="voice-reader-wrapper" [class.isPlaying]="isPlaying">
+  <div class="pulse-wave"></div>
+
+  <button class="floating-voice-btn" (click)="toggleMenu($event)" type="button">
+    <span>{{ isPlaying ? '🔊' : '🎙️' }}</span>
+  </button>
+
+  @if (isMenuOpen && recipe) {
+    <div class="voice-menu-card">
+      <div class="main-actions">
+        <button class="chef-btn-action primary" (click)="readFullRecipe()" [disabled]="isPlaying">📖 הקרא מתכון מלא</button>
+        <button class="chef-btn-action" (click)="readIngredients()" [disabled]="isPlaying">🥕 מרכיבים</button>
+        <button class="chef-btn-action" (click)="readInstructions()" [disabled]="isPlaying">👨‍🍳 הוראות</button>
+      </div>
+
+      @if (isPlaying || isPaused) {
+        <div class="playback-panel">
+          <div class="player-buttons">
+            <button class="circle-btn" (click)="isPaused ? resumeReading() : pauseReading()">{{ isPaused ? '▶️' : '⏸️' }}</button>
+            <button class="circle-btn" (click)="stopReading()">⏹️</button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

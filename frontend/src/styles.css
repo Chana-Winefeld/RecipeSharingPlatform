@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap');
+
+:root {
+  --primary-red: #e31e24;
+  --primary-black: #000000;
+  --bg-light: #ffffff;
+}
+
+/* איפוס בסיסי קריטי */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* מונע גלילה לצדדים */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Heebo', sans-serif;
+}
+
+body {
+  background-color: var(--bg-light);
+  direction: rtl;
+  line-height: 1.6;
+}
+
+/* הגדרות מצב כהה גלובליות */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}

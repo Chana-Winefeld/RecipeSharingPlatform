@@ -1,0 +1,108 @@
+<div class="edit-recipe-container">
+  <div *ngIf="isLoading" class="loading-overlay">
+    <div class="spinner"></div>
+    <p>טוען מתכון...</p>
+  </div>
+
+  <div *ngIf="!isLoading" class="animate-fade-in">
+    <div class="section-header">
+      <h1 class="section-title">✏️ עריכת מתכון</h1>
+      <div class="red-line"></div>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" class="recipe-form">
+      
+      <div class="card-styled">
+        <h3 class="card-title">📋 פרטים כלליים</h3>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label>שם המתכון *</label>
+            <input type="text" [(ngModel)]="title" name="title" required>
+          </div>
+          <div class="form-group">
+            <label>זמן הכנה (דקות)</label>
+            <input type="number" [(ngModel)]="prepTime" name="prepTime">
+          </div>
+        </div>
+      </div>
+
+      <div class="card-styled">
+        <h3 class="card-title">🥘 רכיבים ומצרכים</h3>
+        
+        <div class="add-ingredient-bar">
+          <div class="ing-input-col flex-3">
+            <label>מצרך</label>
+            <input type="text" [(ngModel)]="newIngredient.product" name="prod" placeholder="למשל: קמח">
+          </div>
+          
+          <div class="ing-input-col flex-1">
+            <label>כמות</label>
+            <input type="number" [(ngModel)]="newIngredient.amount" name="amount">
+          </div>
+          
+          <div class="ing-input-col flex-2">
+            <label>יחידה</label>
+            <select [(ngModel)]="newIngredient.unit" name="unit">
+              <option *ngFor="let unit of unitOptions" [value]="unit">{{ unit }}</option>
+            </select>
+          </div>
+          
+          <div class="ing-input-col flex-2">
+            <label>כשרות</label>
+            <select [(ngModel)]="newIngredient.type" name="ingType">
+              <option value="Parve">🌿 פרווה</option>
+              <option value="Dairy">🥛 חלבי</option>
+              <option value="Meat">🥩 בשרי</option>
+            </select>
+          </div>
+          
+          <button type="button" (click)="addIngredient()" class="btn-add-ing" [disabled]="!newIngredient.product">
+            הוסף +
+          </button>
+        </div>
+
+        <div class="ingredients-list">
+          <div *ngFor="let ing of ingredients; let i = index" class="ingredient-row">
+            <div class="ing-data">
+              <span class="ing-name">{{ ing.product }}</span>
+              <span class="ing-details">{{ ing.amount }} {{ ing.unit }}</span>
+            </div>
+            <div class="ing-meta">
+              <span class="ing-type-tag" [style.color]="getKosherColor(ing.type)">
+                {{ getKosherIcon(ing.type) }}
+              </span>
+              <button type="button" (click)="removeIngredient(i)" class="btn-remove">✕</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-styled">
+        <h3 class="card-title">📖 אופן ההכנה</h3>
+        <div class="form-group">
+          <textarea [(ngModel)]="instructions" name="instructions" rows="6" placeholder="איך מכינים?"></textarea>
+        </div>
+
+        <div class="image-section">
+          <label>תמונת המתכון</label>
+          <div class="upload-box" (click)="fileInput.click()">
+            <img *ngIf="imagePreview" [src]="imagePreview" class="preview-img">
+            <img *ngIf="!imagePreview && recipe?.image_path" [src]="getImageUrl(recipe!.image_path!)" class="preview-img">
+            
+            <div *ngIf="!imagePreview && !recipe?.image_path" class="upload-placeholder">
+              <span>📷</span>
+              <p>לחץ להעלאת תמונה</p>
+            </div>
+            <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" hidden>
+          </div>
+          <button *ngIf="imagePreview" type="button" (click)="removeNewImage()" class="btn-undo-img">ביטול תמונה חדשה</button>
+        </div>
+      </div>
+
+      <div class="form-actions-fixed">
+        <button type="submit" class="btn-submit" [disabled]="isSubmitting">שמור שינויים</button>
+        <button type="button" (click)="cancel()" class="btn-cancel">ביטול</button>
+      </div>
+    </form>
+  </div>
+</div>
